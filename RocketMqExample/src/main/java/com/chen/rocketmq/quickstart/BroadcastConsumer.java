@@ -1,10 +1,8 @@
 package com.chen.rocketmq.quickstart;
 
-import org.apache.rocketmq.client.consumer.DefaultMQPullConsumer;
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
-import org.apache.rocketmq.client.consumer.listener.MessageListener;
 import org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.common.message.MessageExt;
@@ -17,10 +15,10 @@ import java.util.List;
  * @author chen
  * @version 1.0.0
  * @ClassName BalanceConsumer.java
- * @Description TODO
+ * @Description 广播消费
  * @createTime 2022-08-08 23:06
  */
-public class BalanceConsumer {
+public class BroadcastConsumer {
     public static void main(String[] args) throws MQClientException {
         // 实例化消费者，指定组名：TopicTest 10条消息 gourp_consumer， lijin 8(2)
         DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("group_consumer");
@@ -29,10 +27,11 @@ public class BalanceConsumer {
         // 订阅Topic
         consumer.subscribe("TopicTest", "*");
 
-        // 集群模式消费
-        consumer.setMessageModel(MessageModel.CLUSTERING);
+        // 广播模式消费
+        consumer.setMessageModel(MessageModel.BROADCASTING);
         // 注册回调函数，处理消息
         consumer.registerMessageListener(new MessageListenerConcurrently() {
+            @Override
             public ConsumeConcurrentlyStatus consumeMessage(List<MessageExt> msgs, ConsumeConcurrentlyContext context) {
                 try {
                     for (MessageExt msg : msgs) {
