@@ -27,6 +27,7 @@ public class LocationController {
 
     /**
      * Dis rest.
+     * http://localhost:8085/app/v1/loc/radius?limit=5&rad=200&x=115.03&y=38.44
      *
      * @param x     经度
      * @param y     纬度
