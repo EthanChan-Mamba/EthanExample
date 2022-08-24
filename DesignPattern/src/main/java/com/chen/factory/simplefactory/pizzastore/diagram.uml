@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="0.0" y="193.0">com.chen.factory.simplefactory.pizzastore.pizza.CheesePizza</node>
+    <node x="0.0" y="292.0">com.chen.factory.simplefactory.pizzastore.order.OrderPizza</node>
+    <node x="75.5" y="0.0">com.chen.factory.simplefactory.pizzastore.pizza.Pizza</node>
+    <node x="151.0" y="193.0">com.chen.factory.simplefactory.pizzastore.pizza.GreekPizza</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="com.chen.factory.simplefactory.pizzastore.pizza.CheesePizza" target="com.chen.factory.simplefactory.pizzastore.pizza.Pizza">
+      <point x="0.0" y="-27.0" />
+      <point x="65.5" y="168.0" />
+      <point x="108.25" y="168.0" />
+      <point x="-32.75" y="71.5" />
+    </edge>
+    <edge source="com.chen.factory.simplefactory.pizzastore.pizza.GreekPizza" target="com.chen.factory.simplefactory.pizzastore.pizza.Pizza">
+      <point x="0.0" y="-27.0" />
+      <point x="216.5" y="168.0" />
+      <point x="173.75" y="168.0" />
+      <point x="32.75" y="71.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="550.5" y="313.0" />
+  <SelectedNodes>
+    <node>com.chen.factory.simplefactory.pizzastore.pizza.CheesePizza</node>
+    <node>com.chen.factory.simplefactory.pizzastore.pizza.Pizza</node>
+    <node>com.chen.factory.simplefactory.pizzastore.pizza.GreekPizza</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Inner Classes</Category>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

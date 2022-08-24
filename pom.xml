@@ -18,6 +18,7 @@
         <module>NettyExample</module>
         <module>RedisExample</module>
         <module>RedisExample/RedisGeoExample</module>
+        <module>DesignPattern</module>
     </modules>
 
     <dependencyManagement>
