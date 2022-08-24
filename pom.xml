@@ -17,6 +17,7 @@
         <module>Algorithm</module>
         <module>NettyExample</module>
         <module>RedisExample</module>
+        <module>RedisExample/RedisGeoExample</module>
     </modules>
 
     <dependencyManagement>
