@@ -1,0 +1,51 @@
+spring:
+  datasource:
+    # 动态数据源配置
+    dynamic:
+      datasource:
+        master:
+          type: com.zaxxer.hikari.HikariDataSource
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          url: jdbc:mysql://127.0.0.1:3306/db1?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&useSSL=false&verifyServerCertificate=false&autoReconnct=true&autoReconnectForPools=true&allowMultiQueries=true
+          username: root
+          password: root
+      # 指定默认数据源名称
+      primary: master
+  # 分表配置
+  shardingsphere:
+    datasource:
+      names: sharding-order-system
+      sharding-order-system:
+        type: com.zaxxer.hikari.HikariDataSource
+        driverClassName: com.mysql.cj.jdbc.Driver
+        jdbcUrl: jdbc:mysql://127.0.0.1:3306/db1?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&useSSL=false&verifyServerCertificate=false&autoReconnct=true&autoReconnectForPools=true&allowMultiQueries=true
+        username: root
+        password: root
+    props:
+      # 日志显示SQL
+      sql.show: true
+    sharding:
+      tables:
+        # 订单表
+        t_order:
+          # 真实表 t_order_0
+          actualDataNodes: sharding-order-system.t_order$->{0..1}
+          # 分库策略
+#          databaseStrategy:
+#            none:
+          # 分表策略
+          tableStrategy:
+            inline:
+              shardingColumn: order_id
+              # 分片算法行表达式，需符合groovy语法
+              algorithmExpression: t_order$->{order_id % 2}
+          key-generator:
+            column: order_id
+            type: SNOWFLAKE
+
+spring.main.allow-bean-definition-overriding: true
+
+# mybatis-plus
+mybatis-plus:
+  mapper-locations: classpath:/mapper/*.xml
+  configuration.jdbc-type-for-nul: 'null'
