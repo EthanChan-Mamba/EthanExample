@@ -9,6 +9,13 @@ spring:
           url: jdbc:mysql://127.0.0.1:3306/db1?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&useSSL=false&verifyServerCertificate=false&autoReconnct=true&autoReconnectForPools=true&allowMultiQueries=true
           username: root
           password: root
+        slave: #业务数据库
+          driver-class-name: org.h2.Driver
+          url: jdbc:h2:mem:test;DB_CLOSE_DELAY=-1
+          #生产环境最好存秘钥，连接数据库时再解密处理
+          username: sa
+          #连接密码
+          password:
       # 指定默认数据源名称
       primary: master
   # 分表配置
@@ -48,4 +55,6 @@ spring.main.allow-bean-definition-overriding: true
 # mybatis-plus
 mybatis-plus:
   mapper-locations: classpath:/mapper/*.xml
-  configuration.jdbc-type-for-nul: 'null'
+  configuration:
+    jdbc-type-for-nul: 'null'
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

@@ -33,7 +33,7 @@ public class DataSourceConfiguration {
     /**
      * 分表数据源名称
      */
-    private static final String SHARDING_DATA_SOURCE_NAME = "gits_sharding";
+    private static final String SHARDING_DATA_SOURCE_NAME = "sharding_db";
     /**
      * 动态数据源配置项
      */

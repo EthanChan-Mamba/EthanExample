@@ -39,6 +39,7 @@
         <shardingsphere.version>4.1.1</shardingsphere.version>
         <mybatis-plus.version>3.4.0</mybatis-plus.version>
         <mysql.version>8.0.13</mysql.version>
+        <h2database.version>1.4.196</h2database.version>
     </properties>
 
     <dependencyManagement>
@@ -118,6 +119,11 @@
                 <groupId>com.baomidou</groupId>
                 <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
                 <version>${mybatis-plus.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.h2database</groupId>
+                <artifactId>h2</artifactId>
+                <version>${h2database.version}</version>
             </dependency>
         </dependencies>
 
