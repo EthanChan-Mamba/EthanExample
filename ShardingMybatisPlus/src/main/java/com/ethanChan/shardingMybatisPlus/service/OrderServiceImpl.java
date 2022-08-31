@@ -4,6 +4,7 @@ import com.baomidou.dynamic.datasource.annotation.DS;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.ethanChan.shardingMybatisPlus.config.DataSourceConfiguration;
 import com.ethanChan.shardingMybatisPlus.entity.Order;
 import com.ethanChan.shardingMybatisPlus.mapper.OrderMapper;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,7 @@ import java.util.List;
 // public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements OrderService {
 public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements IService<Order> {
 
-    @DS("gits_sharding")
+    @DS("sharding_db")
     public List<Order> listOrder() {
         return list(new LambdaQueryWrapper<Order>().eq(Order::getOrderId, 0));
     }
