@@ -28,15 +28,31 @@ spring:
         jdbcUrl: jdbc:mysql://127.0.0.1:3306/db1?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&useSSL=false&verifyServerCertificate=false&autoReconnct=true&autoReconnectForPools=true&allowMultiQueries=true
         username: root
         password: root
+#        jdbcUrl: jdbc:mysql://112.74.93.114:3306/risk2_bak?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull&serverTimezone=GMT%2B8
+#        username: root
+#        password: MyNewPass4!
     props:
       # 日志显示SQL
       sql.show: true
     sharding:
       tables:
+        o_repayment_plan:
+          # groovy语法
+          # 根据年月分表
+          actual-data-nodes: sharding-order-system.o_repayment_plan_$->{2022}$->{(1..2).collect{t ->t.toString().padLeft(2,'0')}}
+          table-strategy:
+            inline:
+              sharding-column: sharding
+              algorithm-expression: o_repayment_plan_$->{sharding}
+          key-generator:
+            column: plan_id
+            type: SNOWFLAKE
         # 订单表
         t_order:
           # 真实表 t_order_0
-          actualDataNodes: sharding-order-system.t_order$->{0..1}
+#          actualDataNodes: sharding-order-system.t_order$->{0..1}
+          # 表名称example: t_order_202201, (0..1)会根据0补充成两位数
+          actual-data-nodes: sharding-order-system.t_order_$->{2022}$->{(0..1).collect{t ->t.toString().padLeft(2,'0')}}
           # 分库策略
 #          databaseStrategy:
 #            none:
@@ -45,7 +61,8 @@ spring:
             inline:
               shardingColumn: order_id
               # 分片算法行表达式，需符合groovy语法
-              algorithmExpression: t_order$->{order_id % 2}
+#              algorithmExpression: t_order$->{order_id % 2}
+              algorithmExpression: t_order_20220$->{order_id % 2}
           key-generator:
             column: order_id
             type: SNOWFLAKE

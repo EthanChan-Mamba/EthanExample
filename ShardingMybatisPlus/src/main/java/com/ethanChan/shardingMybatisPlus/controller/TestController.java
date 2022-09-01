@@ -2,8 +2,10 @@ package com.ethanChan.shardingMybatisPlus.controller;
 
 import com.ethanChan.shardingMybatisPlus.entity.CommunicationInfo;
 import com.ethanChan.shardingMybatisPlus.entity.Order;
+import com.ethanChan.shardingMybatisPlus.entity.RepaymentPlan;
 import com.ethanChan.shardingMybatisPlus.service.CommunicationInfoServiceImpl;
 import com.ethanChan.shardingMybatisPlus.service.OrderServiceImpl;
+import com.ethanChan.shardingMybatisPlus.service.RepaymentPlanServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +29,8 @@ public class TestController {
     OrderServiceImpl orderService;
     @Autowired
     CommunicationInfoServiceImpl communicationInfoService;
+    @Autowired
+    RepaymentPlanServiceImpl repaymentPlanService;
 
     @RequestMapping("/test")
     public List<Order> test() {
@@ -49,6 +53,10 @@ public class TestController {
     @RequestMapping("/test5")
     public List<CommunicationInfo> test5() {
         return communicationInfoService.listSlave();
+    }
+    @RequestMapping("/test6")
+    public List<RepaymentPlan> test6() {
+        return repaymentPlanService.listSharding("202201");
     }
 
 }
