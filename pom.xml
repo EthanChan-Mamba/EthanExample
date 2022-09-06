@@ -21,7 +21,6 @@
         <module>DesignPattern</module>
         <module>ElasticsearchExample</module>
         <module>ShardingMybatisPlus</module>
-        <!--        <module>ElasticsearchExample</module>-->
     </modules>
 
     <properties>

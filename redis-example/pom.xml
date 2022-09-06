@@ -13,6 +13,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>RedisGeoExample</module>
+        <module>RedisOptExample</module>
     </modules>
     <dependencies>
         <!-- 引入redis -->
