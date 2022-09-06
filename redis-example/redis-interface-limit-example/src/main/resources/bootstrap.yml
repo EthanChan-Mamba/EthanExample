@@ -1,0 +1,9 @@
+# Tomcat
+server:
+  port: 1022
+# Spring
+spring:
+  redis:
+    host: localhost
+    port: 6379
+    password:
