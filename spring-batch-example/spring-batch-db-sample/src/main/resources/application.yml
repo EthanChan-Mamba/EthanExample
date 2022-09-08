@@ -1,0 +1,34 @@
+spring:
+  datasource:
+    # 动态数据源配置
+    dynamic:
+      datasource:
+        master:
+          type: com.zaxxer.hikari.HikariDataSource
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          url: jdbc:mysql://127.0.0.1:3306/ssb_test?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&useSSL=false&verifyServerCertificate=false&autoReconnct=true&autoReconnectForPools=true&allowMultiQueries=true
+          username: root
+          password: root
+        slave: #业务数据库
+          driver-class-name: oracle.jdbc.OracleDriver
+          url: jdbc:oracle:thin:@localhost:1521:ORCL
+          #生产环境最好存秘钥，连接数据库时再解密处理
+          username: scott
+          #连接密码
+          password: tiger
+      # 指定默认数据源名称
+      primary: master
+
+spring.main.allow-bean-definition-overriding: true
+
+
+# spring batch配置
+# 默认启动后不自动执行job
+spring.batch.job.enabled: false
+
+# mybatis-plus
+mybatis-plus:
+  mapper-locations: classpath:/mapper/*.xml
+  configuration:
+    jdbc-type-for-nul: 'null'
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

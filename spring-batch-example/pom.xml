@@ -13,6 +13,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>spring-batch-simple-example</module>
+        <module>spring-batch-db-sample</module>
     </modules>
 
     <dependencies>
@@ -41,6 +42,11 @@
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
         </dependency>
     </dependencies>
 </project>

@@ -23,6 +23,7 @@
         <module>Sharding-mybatisplus</module>
         <module>spring-batch-example</module>
         <module>spring-batch-simple-example</module>
+        <module>spring-batch-db-sample</module>
     </modules>
 
     <properties>
@@ -41,6 +42,7 @@
         <mybatis-plus.version>3.4.0</mybatis-plus.version>
         <mysql.version>8.0.13</mysql.version>
         <h2database.version>1.4.196</h2database.version>
+        <oracle.version>19.7.0.0</oracle.version>
     </properties>
 
     <dependencyManagement>
@@ -126,6 +128,13 @@
                 <artifactId>h2</artifactId>
                 <version>${h2database.version}</version>
             </dependency>
+            <!-- https://mvnrepository.com/artifact/com.oracle.database.jdbc/ojdbc8 -->
+            <dependency>
+                <groupId>com.oracle.database.jdbc</groupId>
+                <artifactId>ojdbc8</artifactId>
+                <version>${oracle.version}</version>
+            </dependency>
+
         </dependencies>
 
     </dependencyManagement>
