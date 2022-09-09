@@ -26,10 +26,7 @@ public class TargetOrderServiceImpl extends ServiceImpl<TargetOrderMapper, Targe
     @DS("slave")
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public boolean saveOrUpdateBatchSlava(List<TargetOrder> targetOrderList) {
-        for (TargetOrder e : targetOrderList) {
-            this.baseMapper.insert(e);
-        }
-        return true;
+        return saveBatch(targetOrderList);
     }
 
 
