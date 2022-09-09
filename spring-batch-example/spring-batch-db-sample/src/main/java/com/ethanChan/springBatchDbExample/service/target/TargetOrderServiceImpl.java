@@ -7,6 +7,8 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ethanChan.springBatchDbExample.entity.target.TargetOrder;
 import com.ethanChan.springBatchDbExample.mapper.target.TargetOrderMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +24,7 @@ import java.util.List;
 public class TargetOrderServiceImpl extends ServiceImpl<TargetOrderMapper, TargetOrder> implements IService<TargetOrder> {
 
     @DS("slave")
-    // @DSTransactional
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public boolean saveOrUpdateBatchSlava(List<TargetOrder> targetOrderList) {
         for (TargetOrder e : targetOrderList) {
             this.baseMapper.insert(e);

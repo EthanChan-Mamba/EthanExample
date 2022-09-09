@@ -1,5 +1,6 @@
 package com.ethanChan.springBatchDbExample.example.param.step;
 
+import com.baomidou.dynamic.datasource.annotation.DSTransactional;
 import com.ethanChan.springBatchDbExample.common.SyncConstants;
 import com.ethanChan.springBatchDbExample.entity.target.TargetOrder;
 import com.ethanChan.springBatchDbExample.service.target.TargetOrderServiceImpl;
