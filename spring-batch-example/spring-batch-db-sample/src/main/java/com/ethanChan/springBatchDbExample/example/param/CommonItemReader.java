@@ -1,10 +1,8 @@
 package com.ethanChan.springBatchDbExample.example.param;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.ethanChan.springBatchDbExample.common.SyncConstants;
-import com.ethanChan.springBatchDbExample.controller.ExcelOperateServiceImpl;
-import com.ethanChan.springBatchDbExample.entity.origin.Order;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.mybatis.spring.batch.MyBatisPagingItemReader;
+import com.ethanChan.springBatchDbExample.service.OperateServiceImpl;
 import org.springframework.batch.core.StepExecution;
 import org.springframework.batch.item.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +24,7 @@ public class CommonItemReader<T> implements ItemReader<T> {
     protected T target;
     private StepExecution stepExecution;
     @Autowired
-    ExcelOperateServiceImpl excelOperateService;
+    OperateServiceImpl excelOperateService;
 
     public StepExecution getStepExecution() {
         return stepExecution;
@@ -39,12 +37,14 @@ public class CommonItemReader<T> implements ItemReader<T> {
     @Override
     public T read() {
         if (Objects.isNull(items)) {
-            items = (List<T>) excelOperateService.commonMapperSelect(target.getClass());
+            Map<String, Object> params = this.getParams();
+            QueryWrapper queryWrapper = (QueryWrapper) params.get("QueryWrapper");
+            items = (List<T>) excelOperateService.commonMapperSelect(target.getClass(), queryWrapper);
             ExecutionContext executionContext = stepExecution.getJobExecution().getExecutionContext();
             //readNum参数
             executionContext.put(SyncConstants.PASS_PARAM_READ_NUM, items.size());
             //datetime参数
-            executionContext.put(SyncConstants.PASS_PARAM_DATETIME,params.get(SyncConstants.PASS_PARAM_DATETIME));
+            executionContext.put(SyncConstants.PASS_PARAM_DATETIME, this.params.get(SyncConstants.PASS_PARAM_DATETIME));
             if (items.size() > 0) {
                 return items.remove(0);
             }

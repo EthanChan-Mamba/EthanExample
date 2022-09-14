@@ -1,15 +1,18 @@
-package com.ethanChan.springBatchDbExample.controller;
+package com.ethanChan.springBatchDbExample.service;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.conditions.query.Query;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.toolkit.SqlHelper;
 import com.ethanChan.springBatchDbExample.util.SpringContextUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ReflectionUtils;
 
 import java.lang.reflect.Method;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author chen
@@ -18,9 +21,9 @@ import java.util.List;
  * @Description TODO
  * @createTime 2022-09-13 15:19
  */
-
+@Slf4j
 @Service
-public class ExcelOperateServiceImpl {
+public class OperateServiceImpl {
     /**
      * 获取bean对应的mapper类
      * @param bean 数据实体类
@@ -91,17 +94,17 @@ public class ExcelOperateServiceImpl {
     }
 
 
-    public List<Object> commonMapperSelect(Class<?> bean) {
+    public List<Object> commonMapperSelect(Class<?> bean, Query queryWrapper) {
         //获取serviceBean
         Object mapperServiceBean = getMapperServiceBean(bean);
         try {
-            QueryWrapper ew = new QueryWrapper();
+            // QueryWrapper ew = new QueryWrapper();
             // ew.setEntity(bean);//???
             //构造查询条件
             // ????
             Method mapperServiceBeanMethod = ReflectionUtils.findMethod(mapperServiceBean.getClass(), "selectList", Wrapper.class);
             // 执行方法
-            Object obj = ReflectionUtils.invokeMethod(mapperServiceBeanMethod, mapperServiceBean, ew);
+            Object obj = ReflectionUtils.invokeMethod(mapperServiceBeanMethod, mapperServiceBean, queryWrapper);
             if(obj!=null){
                 return (List<Object>)obj;
             }
