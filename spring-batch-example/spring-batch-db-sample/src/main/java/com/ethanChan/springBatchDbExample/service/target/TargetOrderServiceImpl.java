@@ -23,19 +23,15 @@ import java.util.List;
 @Service
 public class TargetOrderServiceImpl extends ServiceImpl<TargetOrderMapper, TargetOrder> implements IService<TargetOrder> {
 
-    @DS("slave")
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public boolean saveOrUpdateBatchSlava(List<TargetOrder> targetOrderList) {
         return saveBatch(targetOrderList);
     }
 
 
-    @DS("slave")
-    public List<TargetOrder> listSlava() {
+    public List<TargetOrder> listOrigin() {
         return list();
     }
 
-    @DS("slave")
     @DSTransactional
     public boolean insertSlave(ArrayList<TargetOrder> orders) {
         return saveBatch(orders);

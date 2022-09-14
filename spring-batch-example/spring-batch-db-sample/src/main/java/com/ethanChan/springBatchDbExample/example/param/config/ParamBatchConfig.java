@@ -1,11 +1,14 @@
 package com.ethanChan.springBatchDbExample.example.param.config;
 
 import com.ethanChan.springBatchDbExample.common.SyncConstants;
+import com.ethanChan.springBatchDbExample.controller.ExcelOperateServiceImpl;
 import com.ethanChan.springBatchDbExample.entity.origin.Order;
+import com.ethanChan.springBatchDbExample.example.param.CommonItemReader;
 import com.ethanChan.springBatchDbExample.example.param.listener.Db2DbJobEndListener;
 import com.ethanChan.springBatchDbExample.example.param.step.OrderItemReader;
 import com.ethanChan.springBatchDbExample.example.param.step.OrderItemWriter;
 import com.ethanChan.springBatchDbExample.example.param.step.ParamItemProcessor;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobExecutionListener;
 import org.springframework.batch.core.Step;
@@ -53,9 +56,11 @@ public class ParamBatchConfig {
 
     @Bean
     public Step paramStep(ItemReader paramItemReader, ItemProcessor paramProcessor
+    // public Step paramStep(ItemProcessor paramProcessor
             , ItemWriter paramWriter) {
         String funcName = Thread.currentThread().getStackTrace()[1].getMethodName();
         return stepBuilderFactory.get(funcName)
+                // chunk就是数据块，你需要定义多大的数据量是一个chunk
                 .<Order, Order>chunk(1)
                 .reader(paramItemReader)
                 .processor(paramProcessor)
@@ -63,21 +68,49 @@ public class ParamBatchConfig {
                 .build();
     }
 
+    // @Bean
+    // @StepScope
+    // @DS("slave")
+    // @Transactional(propagation = Propagation.REQUIRES_NEW)
+    // public CommonMybatisItemReader<Order>  orderCommonMybatisItemReader() {
+    //     // DynamicRoutingDataSource dynamicRoutingDataSource = new DynamicRoutingDataSource();
+    //     // DataSource slave = dynamicRoutingDataSource.getDataSource("slave");
+    //     // DataSource slave = dynamicRoutingDataSource.getDataSource("slave");
+    //     // SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
+    //     // factoryBean.setDataSource(slave);
+    //     // SqlSessionFactory sqlSessionFactory = null;
+    //     // try {
+    //     //     sqlSessionFactory = factoryBean.getObject();
+    //     // } catch (Exception e) {
+    //     //     e.printStackTrace();
+    //     // }
+    //     try {
+    //         SqlSession sqlSession = sqlSessionFactory.openSession(dynamicRoutingDataSource.getConnection());
+    //     } catch (SQLException e) {
+    //         e.printStackTrace();
+    //     }
+    //     return new CommonMybatisItemReader(Order.class.getSimpleName());
+    // }
+
+    @Autowired
+    ExcelOperateServiceImpl excelOperateService;
+
     @Bean
     @StepScope
     public ItemReader paramItemReader(@Value("#{stepExecution}") StepExecution stepExecution,
                                       @Value("#{jobParameters['time']}") Long timeParam) {
-        OrderItemReader userItemReader = new OrderItemReader();
+        // OrderItemReader userItemReader = new OrderItemReader();
+        CommonItemReader<Order> orderCommonItemReader = new CommonItemReader<>();
+        orderCommonItemReader.setTarget(new Order());
         //设置参数，当前示例可不设置参数
         Map<String, Object> params = new HashMap<>();
         Date datetime = new Date(timeParam);
         params.put(SyncConstants.PASS_PARAM_DATETIME, datetime);
-        userItemReader.setParams(params);
-        userItemReader.setStepExecution(stepExecution);
+        orderCommonItemReader.setParams(params);
+        orderCommonItemReader.setStepExecution(stepExecution);
 
-        return userItemReader;
+        return orderCommonItemReader;
     }
-
     @Bean
     public ItemWriter paramWriter() {
         return new OrderItemWriter();
