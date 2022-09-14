@@ -1,13 +1,18 @@
 package com.ethanChan.springBatchDbExample.example.param.config;
 
+import com.baomidou.dynamic.datasource.annotation.DS;
 import com.ethanChan.springBatchDbExample.common.SyncConstants;
 import com.ethanChan.springBatchDbExample.controller.ExcelOperateServiceImpl;
 import com.ethanChan.springBatchDbExample.entity.origin.Order;
 import com.ethanChan.springBatchDbExample.example.param.CommonItemReader;
+import com.ethanChan.springBatchDbExample.example.param.CommonMybatisItemReader;
 import com.ethanChan.springBatchDbExample.example.param.listener.Db2DbJobEndListener;
 import com.ethanChan.springBatchDbExample.example.param.step.OrderItemReader;
 import com.ethanChan.springBatchDbExample.example.param.step.OrderItemWriter;
 import com.ethanChan.springBatchDbExample.example.param.step.ParamItemProcessor;
+import com.ethanChan.springBatchDbExample.util.SpringContextUtil;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.aspectj.weaver.ast.Or;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobExecutionListener;
@@ -24,7 +29,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -67,30 +75,6 @@ public class ParamBatchConfig {
                 .writer(paramWriter)
                 .build();
     }
-
-    // @Bean
-    // @StepScope
-    // @DS("slave")
-    // @Transactional(propagation = Propagation.REQUIRES_NEW)
-    // public CommonMybatisItemReader<Order>  orderCommonMybatisItemReader() {
-    //     // DynamicRoutingDataSource dynamicRoutingDataSource = new DynamicRoutingDataSource();
-    //     // DataSource slave = dynamicRoutingDataSource.getDataSource("slave");
-    //     // DataSource slave = dynamicRoutingDataSource.getDataSource("slave");
-    //     // SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
-    //     // factoryBean.setDataSource(slave);
-    //     // SqlSessionFactory sqlSessionFactory = null;
-    //     // try {
-    //     //     sqlSessionFactory = factoryBean.getObject();
-    //     // } catch (Exception e) {
-    //     //     e.printStackTrace();
-    //     // }
-    //     try {
-    //         SqlSession sqlSession = sqlSessionFactory.openSession(dynamicRoutingDataSource.getConnection());
-    //     } catch (SQLException e) {
-    //         e.printStackTrace();
-    //     }
-    //     return new CommonMybatisItemReader(Order.class.getSimpleName());
-    // }
 
     @Autowired
     ExcelOperateServiceImpl excelOperateService;

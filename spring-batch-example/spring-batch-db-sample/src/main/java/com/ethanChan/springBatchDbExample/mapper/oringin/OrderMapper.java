@@ -17,8 +17,6 @@ import java.util.List;
  * @createTime 2022-09-08 15:35
  */
 @Mapper
-@DS("slave")
-@Transactional(propagation = Propagation.REQUIRES_NEW)
 public interface OrderMapper extends BaseMapper<Order> {
 
 }
