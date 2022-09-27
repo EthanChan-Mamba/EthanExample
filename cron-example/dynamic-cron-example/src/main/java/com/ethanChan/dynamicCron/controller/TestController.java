@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author chen
  * @version 1.0.0
  * @ClassName TestController.java
- * @Description 调用接口动态修改该定时任务的执行时间
+ * @Description
  * @createTime 2022-09-27 10:05
  */
 @Slf4j
@@ -26,6 +26,11 @@ public class TestController {
         this.scheduleTask = scheduleTask;
     }
 
+    /**
+     * 调用接口动态修改该定时任务的执行时间
+     * @param cron cron格式字符串
+     * @return
+     */
     @GetMapping("/updateCron")
     public String updateCron(String cron) {
         log.info("new cron :{}", cron);
@@ -33,6 +38,11 @@ public class TestController {
         return "ok";
     }
 
+    /**
+     * 设置循环间隔时间，单位为毫秒
+     * @param timer 循环间隔时间，单位为毫秒
+     * @return
+     */
     @GetMapping("/updateTimer")
     public String updateTimer(Long timer) {
         log.info("new timer :{}", timer);
