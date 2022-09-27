@@ -1,6 +1,7 @@
 package com.ethanChan.springBatchDbExample.example.param.config;
 
 import com.ethanChan.springBatchDbExample.common.SyncConstants;
+import com.ethanChan.springBatchDbExample.entity.target.TargetOrder;
 import com.ethanChan.springBatchDbExample.service.OperateServiceImpl;
 import com.ethanChan.springBatchDbExample.entity.origin.Order;
 import com.ethanChan.springBatchDbExample.example.param.CommonItemReader;
@@ -22,6 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.task.TaskExecutor;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -59,7 +61,21 @@ public class ParamBatchConfig {
         String funcName = Thread.currentThread().getStackTrace()[1].getMethodName();
         return stepBuilderFactory.get(funcName)
                 // chunk就是数据块，你需要定义多大的数据量是一个chunk
-                .<Order, Order>chunk(1)
+                .<Order, TargetOrder>chunk(1)
+                .reader(paramItemReader)
+                .processor(paramProcessor)
+                .writer(paramWriter)
+                .build();
+    }
+
+    @Bean
+    public Step paramStep1(ItemReader paramItemReader, ItemProcessor paramProcessor
+    // public Step paramStep(ItemProcessor paramProcessor
+            , ItemWriter paramWriter) {
+        String funcName = "step1";
+        return stepBuilderFactory.get(funcName)
+                // chunk就是数据块，你需要定义多大的数据量是一个chunk
+                .<Order, TargetOrder>chunk(1)
                 .reader(paramItemReader)
                 .processor(paramProcessor)
                 .writer(paramWriter)
