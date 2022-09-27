@@ -22,6 +22,7 @@
         <module>elasticsearch-example</module>
         <module>Sharding-mybatisplus</module>
         <module>spring-batch-example</module>
+        <module>cron-example</module>
     </modules>
 
     <properties>
