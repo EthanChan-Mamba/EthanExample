@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <!-- import CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <title>上传图片</title>
+</head>
+<body>
+<div id="app">
+
+    <el-row :gutter="2">
+        <el-col :span="8">
+            <div class="div-center-class">
+                <div class="">
+                    <center><h3>传统上传</h3></center>
+                    <el-upload
+                            class="upload-demo"
+                            action="#"
+                            drag
+                            :http-request="uploadHandle">
+                        <i class="el-icon-upload"></i>
+                        <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+                        <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>
+                    </el-upload>
+                    <div v-if="imgUrl">
+                        <img :src="imgUrl" style="width: 40px;height: 40px"></img>
+                    </div>
+                </div>
+            </div>
+        </el-col>
+        <el-col :span="8">
+            <div class="div-center-class">
+                <div class="">
+                    <center><h3>前端formData直传</h3></center>
+                    <el-upload
+                            class="upload-demo"
+                            action="#"
+                            drag
+                            :http-request="httpRequestHandle">
+                        <i class="el-icon-upload"></i>
+                        <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+                        <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>
+                    </el-upload>
+                    <div v-if="directUrl">
+                        <img :src="directUrl" style="width: 40px;height: 40px"></img>
+                    </div>
+                </div>
+            </div>
+        </el-col>
+        <el-col :span="8">
+            <div class="div-center-class">
+                <div class="">
+                    <center><h3>前端Url直传</h3></center>
+                    <el-upload
+                            class="upload-demo"
+                            action="#"
+                            drag
+                            :http-request="UrlUploadHandle">
+                        <i class="el-icon-upload"></i>
+                        <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+                        <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>
+                    </el-upload>
+                    <div v-if="uploadUrl">
+                        <img :src="uploadUrl" style="width: 40px;height: 40px"></img>
+                    </div>
+                </div>
+            </div>
+        </el-col>
+    </el-row>
+</div>
+</body>
+<!-- import Vue before Element -->
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<!-- import JavaScript -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<!--import  axios -->
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: function () {
+            return {
+                imgUrl: '',
+                directUrl: '',
+                uploadUrl: ''
+            }
+        },
+        methods: {
+
+            uploadHandle(options) {
+                let {file} = options;
+                this.traditionPost(file);
+            },
+            traditionPost(file) {
+                _that = this
+                const form = new FormData();
+                form.append("fileName", file.name);
+                form.append("file", file);
+                this.axiosPost("post", "/upload", form).then(function (res) {
+                    if (res.status === 200) {
+                        _that.imgUrl = res.data.data
+                    } else {
+                        alert("上传失败！")
+                    }
+                })
+            },
+            getpolicy(file) {
+                _that = this
+                axios.get('policy?fileName=' + file.name)
+                    .then(function (response) {
+                        let {xamzalgorithm, xamzcredential, policy, xamzsignature, xamzdate, host} = response.data.data;
+                        let formData = new FormData();
+                        formData.append("key", file.name);
+                        formData.append("x-amz-algorithm", xamzalgorithm);  // 让服务端返回200，不设置则默认返回204。
+                        formData.append("x-amz-credential", xamzcredential);
+                        formData.append("policy", policy);
+                        formData.append("x-amz-signature", xamzsignature);
+                        formData.append("x-amz-date", xamzdate);
+                        formData.append("file", file);
+                        // 发送 POST 请求
+                        _that.axiosPost("post", host, formData).then(function (res) {
+                            if (res.status === 204) {
+                                axios.get('url?fileName=' + file.name).then(function (res) {
+                                    _that.directUrl = res.data.data;
+                                })
+                            } else {
+                                alert("上传失败！")
+                            }
+                        })
+                    })
+            },
+            httpRequestHandle(options) {
+                let {file} = options;
+                this.getpolicy(file);
+            },
+
+            UrlUploadHandle(options) {
+                let {file} = options;
+                this.getUploadUrl(file);
+            },
+            getUploadUrl(file) {
+                _that = this
+                console.log(file)
+                axios.get('uploadUrl?fileName=' + file.name)
+                    .then(function (response) {
+                        let url = response.data.data;
+                        // 发送 put 请求
+                        let config = {'Content-Type': file.type}
+                        _that.axiosPost("put", url, file, config).then(function (res) {
+                            if (res.status === 200) {
+                                axios.get('url?fileName=' + file.name).then(function (res) {
+                                    _that.uploadUrl = res.data.data;
+                                })
+                            } else {
+                                alert("上传失败！")
+                            }
+                        })
+                    })
+            },
+            //封装
+            //axios封装post请求
+            axiosPost(method, url, data, config) {
+                let result = axios({
+                    method: method,
+                    url: url,
+                    data: data,
+                    headers: config
+                }).then(resp => {
+                    return resp
+                }).catch(error => {
+                    return "exception=" + error;
+                });
+                return result;
+            }
+
+        }
+    })
+</script>
+<style>
+    .div-center-class {
+        padding: 28% 0%;
+        text-align: center;
+        background: beige;
+    }
+</style>
+</html>

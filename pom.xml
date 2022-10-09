@@ -23,6 +23,7 @@
         <module>Sharding-mybatisplus</module>
         <module>spring-batch-example</module>
         <module>cron-example</module>
+        <module>minio-example</module>
     </modules>
 
     <properties>
