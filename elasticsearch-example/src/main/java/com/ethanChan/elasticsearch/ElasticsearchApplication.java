@@ -10,6 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @Description TODO
  * @createTime 2022-08-28 23:31
  */
+@SpringBootApplication
 public class ElasticsearchApplication {
     public static void main(String[] args) {
         SpringApplication.run(ElasticsearchApplication.class, args);

@@ -24,6 +24,8 @@
         <module>spring-batch-example</module>
         <module>cron-example</module>
         <module>minio-example</module>
+        <module>solution</module>
+        <module>solution</module>
     </modules>
 
     <properties>

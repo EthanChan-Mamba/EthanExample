@@ -1,5 +1,7 @@
 package com.ethanChan.minioExample;
 
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
 /**
  * @author chen
  * @version 1.0.0
@@ -10,5 +12,6 @@ package com.ethanChan.minioExample;
  *      使用filename请求服务端获取临时访问文件的URL。（最长时间为7 天，想要永久性访问，需要其他设置，这里不做说明。）
  * @createTime 2022-10-08 11:39
  */
+@SpringBootApplication
 public class MinioExampleApplication {
 }
