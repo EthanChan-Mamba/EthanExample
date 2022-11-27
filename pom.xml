@@ -26,6 +26,7 @@
         <module>minio-example</module>
         <module>solution</module>
         <module>solution</module>
+        <module>springboot2-promethues</module>
     </modules>
 
     <properties>
