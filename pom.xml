@@ -27,6 +27,7 @@
         <module>solution</module>
         <module>solution</module>
         <module>springboot2-promethues</module>
+        <module>spring-event-example</module>
     </modules>
 
     <properties>
