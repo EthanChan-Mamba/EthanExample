@@ -15,6 +15,7 @@
         <module>redis-geo-example</module>
         <module>redis-opt-example</module>
         <module>redis-interface-limit-example</module>
+        <module>redisson-example</module>
     </modules>
     <dependencies>
         <!-- 引入redis -->
