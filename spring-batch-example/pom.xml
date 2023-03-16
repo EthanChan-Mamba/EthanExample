@@ -15,7 +15,6 @@
         <module>spring-batch-simple-example</module>
         <module>spring-batch-db-sample</module>
         <module>spring-batch-db-stepParam-sample</module>
-        <module>spring-batch-dynamic-datasource</module>
     </modules>
 
     <dependencies>

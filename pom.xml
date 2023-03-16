@@ -28,6 +28,7 @@
         <module>solution</module>
         <module>springboot2-promethues</module>
         <module>spring-event-example</module>
+        <module>spring-retry-example</module>
     </modules>
 
     <properties>
