@@ -17,7 +17,6 @@
         <module>algorithm</module>
         <module>netty-example</module>
         <module>redis-example</module>
-        <module>redis-example/redis-geo-Example</module>
         <module>design-pattern</module>
         <module>elasticsearch-example</module>
         <module>Sharding-mybatisplus</module>
@@ -25,10 +24,14 @@
         <module>cron-example</module>
         <module>minio-example</module>
         <module>solution</module>
-        <module>solution</module>
         <module>springboot2-promethues</module>
         <module>spring-event-example</module>
         <module>spring-retry-example</module>
+        <module>spring-spi-example</module>
+        <module>spring-spi-example/aircondition-standard</module>
+        <module>spring-spi-example/aircondition-hanging-type</module>
+        <module>spring-spi-example/aircondition-vertical-type</module>
+        <module>spring-spi-example/aircondition-app</module>
     </modules>
 
     <properties>
