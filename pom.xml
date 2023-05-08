@@ -32,6 +32,7 @@
         <module>spring-spi-example/aircondition-hanging-type</module>
         <module>spring-spi-example/aircondition-vertical-type</module>
         <module>spring-spi-example/aircondition-app</module>
+        <module>nacos-dubbo-example</module>
     </modules>
 
     <properties>
