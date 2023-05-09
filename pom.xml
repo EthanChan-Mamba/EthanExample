@@ -33,6 +33,7 @@
         <module>spring-spi-example/aircondition-vertical-type</module>
         <module>spring-spi-example/aircondition-app</module>
         <module>nacos-dubbo-example</module>
+        <module>springboot-easyexcel</module>
     </modules>
 
     <properties>
@@ -52,10 +53,16 @@
         <mysql.version>8.0.13</mysql.version>
         <h2database.version>1.4.196</h2database.version>
         <oracle.version>19.7.0.0</oracle.version>
+        <easyexcel.version>3.0.5</easyexcel.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>easyexcel</artifactId>
+                <version>${easyexcel.version}</version>
+            </dependency>
             <dependency>
                 <groupId>org.apache.rocketmq</groupId>
                 <artifactId>rocketmq-client</artifactId>
