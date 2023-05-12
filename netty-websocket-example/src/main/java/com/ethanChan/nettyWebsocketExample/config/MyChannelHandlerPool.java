@@ -1,4 +1,4 @@
-package com.ethanChan.nettyExample.config;
+package com.ethanChan.nettyWebsocketExample.config;
 
 import io.netty.channel.group.ChannelGroup;
 import io.netty.channel.group.DefaultChannelGroup;

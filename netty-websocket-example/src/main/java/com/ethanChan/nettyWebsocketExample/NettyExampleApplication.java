@@ -1,6 +1,6 @@
-package com.ethanChan.nettyExample;
+package com.ethanChan.nettyWebsocketExample;
 
-import com.ethanChan.nettyExample.config.NettyServer;
+import com.ethanChan.nettyWebsocketExample.config.NettyServer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

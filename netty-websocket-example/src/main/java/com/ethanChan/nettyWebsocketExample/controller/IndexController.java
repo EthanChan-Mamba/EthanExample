@@ -1,4 +1,4 @@
-package com.ethanChan.nettyExample.controller;
+package com.ethanChan.nettyWebsocketExample.controller;
 
 import cn.hutool.core.util.RandomUtil;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -1,7 +1,7 @@
-package com.ethanChan.nettyExample.hanlder;
+package com.ethanChan.nettyWebsocketExample.hanlder;
 
 import cn.hutool.json.JSONUtil;
-import com.ethanChan.nettyExample.config.MyChannelHandlerPool;
+import com.ethanChan.nettyWebsocketExample.config.MyChannelHandlerPool;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.handler.codec.http.FullHttpRequest;

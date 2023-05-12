@@ -1,6 +1,6 @@
-package com.ethanChan.nettyExample.config;
+package com.ethanChan.nettyWebsocketExample.config;
 
-import com.ethanChan.nettyExample.hanlder.MyWebSocketHandler;
+import com.ethanChan.nettyWebsocketExample.hanlder.MyWebSocketHandler;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
