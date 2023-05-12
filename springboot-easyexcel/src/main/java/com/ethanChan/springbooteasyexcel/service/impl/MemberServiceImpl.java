@@ -2,6 +2,7 @@ package com.ethanChan.springbooteasyexcel.service.impl;
 
 import com.ethanChan.springbooteasyexcel.entity.Member;
 import com.ethanChan.springbooteasyexcel.service.MemberService;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -15,6 +16,7 @@ import java.util.List;
  * @Version 1.0.0
  * @Date 2023-05-09 17:39
  */
+@Service
 public class MemberServiceImpl implements MemberService {
     @Override
     public List<Member> getAllMember() {
