@@ -1,4 +1,4 @@
-package config;
+package com.ethan.redissonbloomfilter.config;
 
 import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;
@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import java.io.IOException;
 
 /**
- * @ClassName config.MyRedissonConfig.java
+ * @ClassName com.ethan.redissonbloomfilter.config.MyRedissonConfig.java
  * @Description TODO
  * @Author chenyixian
  * @Version 1.0.0

@@ -16,6 +16,7 @@
         <module>redis-opt-example</module>
         <module>redis-interface-limit-example</module>
         <module>redisson-example</module>
+        <module>redisson-bloom-filter-example</module>
     </modules>
     <dependencies>
         <!-- 引入redis -->
