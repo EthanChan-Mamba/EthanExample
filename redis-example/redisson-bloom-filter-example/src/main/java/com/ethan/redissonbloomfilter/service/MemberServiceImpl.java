@@ -1,4 +1,4 @@
-package com.ethan.redissonbloomfilter;
+package com.ethan.redissonbloomfilter.service;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
