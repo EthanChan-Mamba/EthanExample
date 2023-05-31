@@ -15,7 +15,6 @@
     <modules>
         <module>rocketmq-example</module>
         <module>algorithm</module>
-        <module>netty-websocket-example</module>
         <module>redis-example</module>
         <module>design-pattern</module>
         <module>elasticsearch-example</module>
@@ -34,6 +33,7 @@
         <module>spring-spi-example/aircondition-app</module>
         <module>nacos-dubbo-example</module>
         <module>springboot-easyexcel</module>
+        <module>netty-example</module>
     </modules>
 
     <properties>
