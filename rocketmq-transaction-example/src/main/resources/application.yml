@@ -1,0 +1,20 @@
+server:
+  port: 8222
+spring:
+  application:
+    name: transaction-rocketmq
+  datasource:
+    # 注意mysql 时区 字符集编码
+    url: jdbc:mysql://127.0.0.1:3306/testdb?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&serverTimezone=GMT%2B8
+    username: root
+    password: root
+    type: com.zaxxer.hikari.HikariDataSource
+    driverClassName: com.mysql.cj.jdbc.Driver
+
+mybatis-plus:
+  mapper-locations: classpath:/mapper/*.xml
+  configuration:
+    jdbc-type-for-nul: 'null'
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+mqAd: 127.0.0.1:9876

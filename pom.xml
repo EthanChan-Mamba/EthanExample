@@ -34,6 +34,7 @@
         <module>nacos-dubbo-example</module>
         <module>springboot-easyexcel</module>
         <module>netty-example</module>
+        <module>rocketmq-transaction-example</module>
     </modules>
 
     <properties>
