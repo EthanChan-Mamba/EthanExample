@@ -35,6 +35,7 @@
         <module>springboot-easyexcel</module>
         <module>netty-example</module>
         <module>rocketmq-transaction-example</module>
+        <module>springboot3</module>
     </modules>
 
     <properties>
